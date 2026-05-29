@@ -1,0 +1,694 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DSPL At - Premium Financial Information Consulting</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
+            scroll-behavior: smooth;
+        }
+
+        /* Color Variables - Your Custom Palette */
+        :root {
+            --primary: #F5EAD3; /* Light Apricot */
+            --secondary: #7D8F79; /* Bamboo Green */
+            --accent: #2C4A31; /* Dark Green */
+            --neutral-gray: #8A8A8A;
+            --gold: #D4B16A; /* Gilded Gold */
+            --white: #ffffff;
+            --dark: #1A1A1A;
+        }
+
+        body {
+            background-color: var(--primary);
+            color: var(--dark);
+            line-height: 1.6;
+        }
+
+        /* Header & Navigation */
+        header {
+            background: var(--white);
+            box-shadow: 0 2px 15px rgba(0,0,0,0.08);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .navbar {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--accent);
+            text-decoration: none;
+        }
+
+        .logo span {
+            color: var(--gold);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2.5rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--dark);
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: var(--accent);
+        }
+
+        .mobile-menu-btn {
+            display: none;
+            font-size: 1.5rem;
+            background: none;
+            border: none;
+            cursor: pointer;
+            color: var(--accent);
+        }
+
+        /* Hero Section */
+        .hero {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 5rem 2rem;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            align-items: center;
+            min-height: 80vh;
+        }
+
+        .hero-text h1 {
+            font-size: 3rem;
+            line-height: 1.2;
+            margin-bottom: 1.5rem;
+            color: var(--accent);
+        }
+
+        .hero-text p {
+            font-size: 1.1rem;
+            color: var(--neutral-gray);
+            margin-bottom: 2rem;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 1rem 2.5rem;
+            background: var(--accent);
+            color: var(--white);
+            text-decoration: none;
+            border-radius: 5px;
+            font-weight: 500;
+            transition: background 0.3s;
+        }
+
+        .btn:hover {
+            background: #1f3623;
+        }
+
+        .hero-img img {
+            width: 100%;
+            border-radius: 12px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+        }
+
+        /* Section General */
+        .section {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 6rem 2rem;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2.2rem;
+            color: var(--accent);
+            margin-bottom: 1.5rem;
+            position: relative;
+        }
+
+        .section-subtitle {
+            text-align: center;
+            font-size: 1.1rem;
+            color: var(--neutral-gray);
+            max-width: 800px;
+            margin: 0 auto 4rem;
+            line-height: 1.8;
+        }
+
+        .section-title::after {
+            content: '';
+            width: 80px;
+            height: 3px;
+            background: var(--gold);
+            position: absolute;
+            bottom: -12px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        /* Services Section */
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2.5rem;
+        }
+
+        .service-card {
+            background: var(--white);
+            padding: 2.5rem;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            transition: transform 0.3s;
+        }
+
+        .service-card:hover {
+            transform: translateY(-8px);
+        }
+
+        .service-card h3 {
+            color: var(--accent);
+            margin-bottom: 1rem;
+            font-size: 1.4rem;
+        }
+
+        .service-card p {
+            color: var(--neutral-gray);
+            margin-bottom: 1.2rem;
+        }
+
+        .service-card .service-details {
+            font-size: 0.95rem;
+            color: #666;
+            line-height: 1.7;
+        }
+
+        /* About Section */
+        .about {
+            background: var(--secondary);
+            color: var(--white);
+        }
+
+        .about .section-title {
+            color: var(--white);
+        }
+
+        .about .section-subtitle {
+            color: #f0f0f0;
+            opacity: 0.9;
+        }
+
+        .about-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            align-items: center;
+        }
+
+        .about-img img {
+            width: 100%;
+            border-radius: 12px;
+        }
+
+        .about-text p {
+            margin-bottom: 1.2rem;
+            font-size: 1.05rem;
+            line-height: 1.8;
+        }
+
+        .about-highlights {
+            margin-top: 2rem;
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1rem;
+        }
+
+        .about-highlight-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 0.8rem;
+        }
+
+        .about-highlight-item i {
+            color: var(--gold);
+            font-size: 1.2rem;
+            margin-top: 0.3rem;
+        }
+
+        /* Contact Section */
+        .contact-wrapper {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            align-items: start;
+        }
+
+        .contact-info-card {
+            background: var(--white);
+            padding: 2.5rem;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+        }
+
+        .contact-info-card h3 {
+            color: var(--accent);
+            margin-bottom: 2rem;
+            font-size: 1.5rem;
+        }
+
+        .contact-info-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 1rem;
+            margin-bottom: 1.8rem;
+        }
+
+        .contact-info-item i {
+            color: var(--gold);
+            font-size: 1.2rem;
+            margin-top: 0.3rem;
+        }
+
+        .contact-info-item .info-text {
+            color: var(--neutral-gray);
+            line-height: 1.7;
+        }
+
+        .contact-info-item .info-text strong {
+            color: var(--accent);
+            display: block;
+            margin-bottom: 0.3rem;
+        }
+
+        .contact-form {
+            background: var(--white);
+            padding: 3rem;
+            border-radius: 12px;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.08);
+        }
+
+        .form-group {
+            margin-bottom: 1.8rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.6rem;
+            color: var(--accent);
+            font-weight: 500;
+        }
+
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 1rem;
+            border: 1px solid #ddd;
+            border-radius: 6px;
+            font-size: 1rem;
+            outline: none;
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus {
+            border-color: var(--accent);
+        }
+
+        .contact-info {
+            text-align: center;
+            margin-top: 3rem;
+            display: none; /* 隐藏原有简单联系方式，改用新的contact-info-card */
+        }
+
+        /* Success Message */
+        .success-message {
+            display: none;
+            background: var(--secondary);
+            color: var(--white);
+            padding: 1.2rem;
+            border-radius: 6px;
+            text-align: center;
+            margin-bottom: 1.5rem;
+        }
+
+        /* Footer */
+        footer {
+            background: var(--accent);
+            color: var(--white);
+            text-align: center;
+            padding: 3rem 2rem;
+        }
+
+        footer p {
+            opacity: 0.9;
+        }
+
+        /* Mobile Responsive */
+        @media (max-width: 992px) {
+            .hero, .about-content, .contact-wrapper {
+                grid-template-columns: 1fr;
+            }
+
+            .hero {
+                padding: 3rem 2rem;
+                text-align: center;
+            }
+
+            .hero-text h1 {
+                font-size: 2.2rem;
+            }
+
+            .contact-wrapper {
+                gap: 2rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+                flex-direction: column;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                right: 0;
+                background: var(--white);
+                padding: 2rem;
+                box-shadow: 0 5px 10px rgba(0,0,0,0.1);
+                gap: 1.5rem;
+            }
+
+            .nav-links.active {
+                display: flex;
+            }
+
+            .mobile-menu-btn {
+                display: block;
+            }
+
+            .contact-form {
+                padding: 2rem 1.5rem;
+            }
+
+            .about-highlights {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+    <!-- 引入图标库增强视觉效果 -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+
+    <!-- Header Navigation -->
+    <header>
+        <div class="navbar">
+            <a href="#home" class="logo">DSPL <span>At</span></a>
+            <button class="mobile-menu-btn" id="menuBtn">☰</button>
+            <ul class="nav-links" id="navLinks">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#about">About Us</a></li>
+                <li><a href="#services">Services</a></li>
+                <li><a href="#contact">Contact Us</a></li>
+            </ul>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="hero-text">
+            <h1>Premium Financial Information Consulting Services</h1>
+            <p>Professional financial guidance, data analysis, and strategic consulting for individuals and businesses worldwide. Trust DSPL At for expert financial insights.</p>
+            <a href="#contact" class="btn">Get in Touch</a>
+        </div>
+        <div class="hero-img">
+            <img src="https://amanuelgutierrez129-spec.github.io/333-10/37.jpg" alt="Financial Consulting">
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section class="section about" id="about">
+        <h2 class="section-title">About DSPL At</h2>
+        <p class="section-subtitle">Founded in Wakefield, England, DSPL At has established itself as a trusted partner for financial clarity and strategic decision-making. Our mission is to empower clients with data-driven insights and personalized consulting that aligns with their unique financial goals.</p>
+        <div class="about-content">
+            <div class="about-img">
+                <img src="https://amanuelgutierrez129-spec.github.io/333-10/38.jpg" alt="About DSPL At">
+            </div>
+            <div class="about-text">
+                <p>DSPL At is a leading financial information consulting firm based in England, dedicated to delivering high-quality financial strategies, market analysis, and personalized consulting solutions. With over a decade of industry experience, our team combines academic expertise with real-world market knowledge to deliver tangible results.</p>
+                <p>Our approach is rooted in transparency and collaboration: we work closely with each client to understand their financial landscape, challenges, and aspirations before developing tailored solutions that drive growth and mitigate risk.</p>
+                <p>We maintain the highest standards of professionalism, transparency, and client satisfaction in every service we provide, adhering to regulatory best practices and ethical guidelines across all financial sectors.</p>
+                
+                <div class="about-highlights">
+                    <div class="about-highlight-item">
+                        <i class="fas fa-check-circle"></i>
+                        <div>
+                            <strong>10+ Years of Expertise</strong>
+                            <p>Proven track record in financial consulting across UK and international markets</p>
+                        </div>
+                    </div>
+                    <div class="about-highlight-item">
+                        <i class="fas fa-check-circle"></i>
+                        <div>
+                            <strong>Client-Centric Approach</strong>
+                            <p>100% personalized solutions tailored to individual/business needs</p>
+                        </div>
+                    </div>
+                    <div class="about-highlight-item">
+                        <i class="fas fa-check-circle"></i>
+                        <div>
+                            <strong>Regulatory Compliance</strong>
+                            <p>Fully compliant with UK financial regulations and industry standards</p>
+                        </div>
+                    </div>
+                    <div class="about-highlight-item">
+                        <i class="fas fa-check-circle"></i>
+                        <div>
+                            <strong>Global Reach</strong>
+                            <p>Serving clients across Europe, North America, and APAC regions</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section class="section" id="services">
+        <h2 class="section-title">Our Services</h2>
+        <p class="section-subtitle">We offer a comprehensive suite of financial consulting services designed to address the diverse needs of individuals, SMEs, and large corporations. From data analysis to strategic planning, our solutions are built to drive financial success.</p>
+        <div class="services-grid">
+            <div class="service-card">
+                <h3>Financial Data Analysis</h3>
+                <p>Comprehensive analysis of financial markets, trends, and performance metrics to support strategic decisions.</p>
+                <div class="service-details">
+                    <ul style="padding-left: 1.2rem; margin-top: 1rem;">
+                        <li>Market trend identification and forecasting</li>
+                        <li>Financial statement analysis and benchmarking</li>
+                        <li>Data visualization and actionable insights reporting</li>
+                        <li>Historical performance comparison and gap analysis</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="service-card">
+                <h3>Investment Consulting</h3>
+                <p>Professional guidance on investment opportunities, risk management, and portfolio optimization.</p>
+                <div class="service-details">
+                    <ul style="padding-left: 1.2rem; margin-top: 1rem;">
+                        <li>Custom investment strategy development</li>
+                        <li>Risk assessment and mitigation planning</li>
+                        <li>Portfolio diversification and asset allocation</li>
+                        <li>Regular investment performance reviews</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="service-card">
+                <h3>Business Financial Planning</h3>
+                <p>Custom financial planning solutions for businesses to improve growth, stability, and profitability.</p>
+                <div class="service-details">
+                    <ul style="padding-left: 1.2rem; margin-top: 1rem;">
+                        <li>Budget development and cash flow management</li>
+                        <li>Financial forecasting and scenario planning</li>
+                        <li>Cost reduction and revenue optimization strategies</li>
+                        <li>Long-term business financial roadmap creation</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="service-card">
+                <h3>Market Intelligence</h3>
+                <p>Up-to-date financial market information, reports, and insights to keep you ahead of industry changes.</p>
+                <div class="service-details">
+                    <ul style="padding-left: 1.2rem; margin-top: 1rem;">
+                        <li>Real-time market monitoring and alerts</li>
+                        <li>Competitor analysis and industry benchmarking</li>
+                        <li>Regulatory change impact assessment</li>
+                        <li>Custom market research and whitepaper creation</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="service-card">
+                <h3>Risk Assessment</h3>
+                <p>Detailed risk evaluation and mitigation strategies for personal and business financial assets.</p>
+                <div class="service-details">
+                    <ul style="padding-left: 1.2rem; margin-top: 1rem;">
+                        <li>Comprehensive financial risk audit</li>
+                        <li>Operational and market risk identification</li>
+                        <li>Risk mitigation strategy implementation</li>
+                        <li>Regular risk monitoring and review</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="service-card">
+                <h3>Strategic Consulting</h3>
+                <p>Tailored financial strategies designed to meet your short-term and long-term financial goals.</p>
+                <div class="service-details">
+                    <ul style="padding-left: 1.2rem; margin-top: 1rem;">
+                        <li>Financial goal setting and roadmap development</li>
+                        <li>Mergers & acquisitions financial advisory</li>
+                        <li>Business expansion and scaling financial planning</li>
+                        <li>Succession planning for family businesses</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section class="section" id="contact">
+        <h2 class="section-title">Contact Us</h2>
+        <p class="section-subtitle">Whether you have a question about our services, need a personalized consultation, or want to discuss your financial goals, our team is here to help. Reach out to us via the form below or directly through our contact channels.</p>
+        
+        <div class="contact-wrapper">
+            <div class="contact-info-card">
+                <h3>Get in Touch</h3>
+                <div class="contact-info-item">
+                    <i class="fas fa-map-marker-alt"></i>
+                    <div class="info-text">
+                        <strong>Office Address</strong>
+                        58 Park Lodge Ln, Wakefield, England, WF2 8RA
+                    </div>
+                </div>
+                <div class="contact-info-item">
+                    <i class="fas fa-phone"></i>
+                    <div class="info-text">
+                        <strong>Phone Number</strong>
+                        +44 7533328754 (Mon-Fri: 9:00 AM - 6:00 PM GMT)
+                    </div>
+                </div>
+                <div class="contact-info-item">
+                    <i class="fas fa-envelope"></i>
+                    <div class="info-text">
+                        <strong>Email Address</strong>
+                        contact@dsplat.co.uk (Response within 24 business hours)
+                    </div>
+                </div>
+                <div class="contact-info-item">
+                    <i class="fas fa-clock"></i>
+                    <div class="info-text">
+                        <strong>Business Hours</strong>
+                        Monday - Friday: 9:00 AM to 6:00 PM GMT<br>
+                        Saturday: 10:00 AM to 2:00 PM GMT (By Appointment Only)
+                    </div>
+                </div>
+            </div>
+
+            <div class="contact-form">
+                <div class="success-message" id="successMsg">Message submitted successfully! We will contact you soon.</div>
+                <form id="contactForm">
+                    <div class="form-group">
+                        <label>Full Name</label>
+                        <input type="text" required placeholder="John Doe">
+                    </div>
+                    <div class="form-group">
+                        <label>Email Address</label>
+                        <input type="email" required placeholder="john@example.com">
+                    </div>
+                    <div class="form-group">
+                        <label>Phone Number</label>
+                        <input type="tel" required placeholder="+44 1234 567890">
+                    </div>
+                    <div class="form-group">
+                        <label>Service Interest</label>
+                        <select class="form-control" style="width: 100%; padding: 1rem; border: 1px solid #ddd; border-radius: 6px; font-size: 1rem; outline: none; color: var(--neutral-gray);">
+                            <option value="">Select a service (optional)</option>
+                            <option value="financial-data-analysis">Financial Data Analysis</option>
+                            <option value="investment-consulting">Investment Consulting</option>
+                            <option value="business-financial-planning">Business Financial Planning</option>
+                            <option value="market-intelligence">Market Intelligence</option>
+                            <option value="risk-assessment">Risk Assessment</option>
+                            <option value="strategic-consulting">Strategic Consulting</option>
+                            <option value="general-inquiry">General Inquiry</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>Your Message</label>
+                        <textarea rows="5" required placeholder="Please describe your requirements, questions, or how we can assist you..."></textarea>
+                    </div>
+                    <button type="submit" class="btn">Submit Message</button>
+                </form>
+            </div>
+        </div>
+
+        <div class="contact-info">
+            <p><strong>Address:</strong> England Wakefield 58 Park Lodge Ln</p>
+            <p><strong>Phone:</strong> +44 7533328754</p>
+            <p><strong>Email:</strong> contact@dsplat.co.uk</p>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2025 DSPL At. All rights reserved. Premium Financial Information Consulting.</p>
+    </footer>
+
+    <script>
+        // Mobile Menu Toggle
+        const menuBtn = document.getElementById('menuBtn');
+        const navLinks = document.getElementById('navLinks');
+        
+        menuBtn.addEventListener('click', () => {
+            navLinks.classList.toggle('active');
+        });
+
+        // Close menu when link clicked (mobile)
+        document.querySelectorAll('.nav-links a').forEach(link => {
+            link.addEventListener('click', () => {
+                navLinks.classList.remove('active');
+            });
+        });
+
+        // Contact Form Submit
+        const contactForm = document.getElementById('contactForm');
+        const successMsg = document.getElementById('successMsg');
+        
+        contactForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            successMsg.style.display = 'block';
+            contactForm.reset();
+            
+            // Auto hide message after 5 seconds
+            setTimeout(() => {
+                successMsg.style.display = 'none';
+            }, 5000);
+        });
+    </script>
+
+</body>
+</html>
